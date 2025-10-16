@@ -329,10 +329,11 @@ def main():
     df = read_file("datos.xlsx")
 
     for i, row in df.iterrows():
-        print(f"Procesando {row[CODIGO]} - {row[CURSO]}")
+        print(f"\nIniciando generación de guía -> {row[CODIGO]} - {row[CURSO]}\n")
 
-        html_path = BASE / f'{row[CODIGO_SIS]}.html' # Ruta del archivo generado
+        html_path = BASE / "finales" / f'{row[CODIGO_SIS]}.html' # Ruta del archivo generado
 
+        print('Actualizando datos de la oferta\n')
         html_portada = get_file_html(template)
 
         # Reemplazar datos por documento excel (oferta académica)
@@ -365,6 +366,8 @@ def main():
                 boton_semana = f'<a title="Semana {i}" href="#semana_{i}">{i}</a>'
                 menu_semanas += boton_semana
 
+                print(f'Obteniendo contenido de Canvas <{m.name}>')
+
                 items = m.get_module_items()
                 page_url = items[0].page_url
                 page = course.get_page(page_url)
@@ -386,6 +389,9 @@ def main():
                             replace = f'https://utpl.instructure.com/api/v1/courses/{course_id}/pages/'
                             page_id = e.replace(replace, '')
                             page = course.get_page(page_id)
+
+                            print(f'\tObteniendo contenido de Canvas <{page.title}>')
+
                             soup = BeautifulSoup(page.body, "html.parser")
 
                             # Manipulación del contenido de cada página
@@ -444,7 +450,11 @@ def main():
 
         output = BASE / "finales" / f"{row[CODIGO_SIS]}.pdf"
 
+        print("\nRenderizando HTML a PDF...")
+
         HTML(filename=str(html_path), base_url=str(html_path.parent)).write_pdf(target=str(output), stylesheets=[CSS(filename=str(css_path))])
+
+        print(f'\nPDF generado ({row[CODIGO_SIS]}.pdf)\n')
 
 if __name__ == "__main__":
     main()
