@@ -27,6 +27,8 @@ MAESTRIA = 'Nombre del Programa'
 CICLO = 'Ciclo'
 BIMESTRE = 'Bimestre'
 URL = 'URL metacurso nuevo (lo gestiona la Dirección de Posgrados)'
+ISBN = 'ISBN DIGITAL'
+FECHA_ISBN = 'FECHA ISBN'
 
 # Ruta base
 BASE = Path(__file__).parent.resolve()
@@ -390,7 +392,7 @@ def main():
                             page_id = e.replace(replace, '')
                             page = course.get_page(page_id)
 
-                            print(f'\tObteniendo contenido de Canvas <{page.title}>')
+                            print(f'\t<{page.title}>')
 
                             soup = BeautifulSoup(page.body, "html.parser")
 

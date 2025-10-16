@@ -2,12 +2,12 @@
 # General
 ############################################################################*/
 
-/* * { */
-/* font-family: "Roboto", sans-serif; */
-/* font-optical-sizing: auto;
+/* * {
+    font-family: "Roboto", sans-serif;
     font-style: normal;
-    font-variation-settings: "wdth" 100; */
-/* } */
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+} */
 
 :root {
     /* Colores */
@@ -17,6 +17,7 @@
     --amarillo: #f4ed06;
     --azul: #003b71;
     --negro: #000000;
+    --focalizador: #faf7d0;
 
     /* Tamaño A4 */
     --page-width: 210mm;
@@ -235,6 +236,10 @@ img.logo {
 # Índice
 ############################################################################*/
 
+.indice h1 {
+    color: var(--gris-oscuro);
+}
+
 .indice li {
     margin-top: 0.25em;
     text-decoration: none;
@@ -283,6 +288,11 @@ img.logo {
 # Contenido
 ############################################################################*/
 
+.indice,
+.contenedor {
+    margin-right: 10px;
+}
+
 .contenedor p,
 .contenedor li {
     text-align: justify;
@@ -328,6 +338,21 @@ img.logo {
     padding: 1px 5px 1px 10px;
     margin: 1px;
     border-radius: 5px;
+}
+
+/* Focalizadores */
+
+.focalizador {
+    display: flex;
+    align-items: center;
+    background-color: var(--focalizador);
+    padding: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.focalizador img {
+    width: 80px;
 }
 
 /*############################################################################
