@@ -316,6 +316,18 @@ img.logo {
     font-weight: 700;
 }
 
+.contenedor h4 {
+    font-size: 14pt;
+    color: var(--gris-oscuro);
+    font-weight: 700;
+}
+
+.contenedor h5 {
+    font-size: 12pt;
+    color: var(--gris-oscuro);
+    font-weight: 700;
+}
+
 /*############################################################################
 # Actividades recomendadas
 ############################################################################*/

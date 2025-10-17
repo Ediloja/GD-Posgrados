@@ -92,7 +92,6 @@ def delete_elements(div):
         if not img and not iframe:
             # Si el párrafo no tiene texto (después de strip)
             if not p.get_text(strip=True):
-                print(p)
                 p.decompose()  # Elimina el elemento del DOM
 
     return div
@@ -152,6 +151,15 @@ def replace_tags(str_html, type=1):
         str_html = str_html.replace('</h3>', '</h5>')
         str_html = str_html.replace('<h2>', '<h4>')
         str_html = str_html.replace('</h2>', '</h4>')
+    elif type == 3:
+        str_html = str_html.replace('<h5>', '<p>')
+        str_html = str_html.replace('</h5>', '</p>')
+        str_html = str_html.replace('<h4>', '<p>')
+        str_html = str_html.replace('</h4>', '<p>')
+        str_html = str_html.replace('<h3>', '<h6>')
+        str_html = str_html.replace('</h3>', '</h6>')
+        str_html = str_html.replace('<h2>', '<h5>')
+        str_html = str_html.replace('</h2>', '</h5>')
 
     return str_html
 
@@ -428,14 +436,17 @@ def main():
                             div = replace_iframe(str(div))
 
                             # Identificar el nivel de encabezado del enlace
-                            style = link.get('style', '')
+                            style = link.get('style', '') 
 
                             if style == '':
                                 html_course += f'<h3>{link.text}</h3>'
                                 div = replace_tags(str(div), 1)
-                            else:
+                            elif style == 'padding-left: 40px;':
                                 html_course += f'<h4>{link.text}</h4>'
                                 div = replace_tags(str(div), 2)
+                            elif style == 'padding-left: 60px;':
+                                html_course += f'<h5>{link.text}</h5>'
+                                div = replace_tags(str(div), 3)
 
                             html_course += div
                 else:
