@@ -82,6 +82,19 @@ def delete_elements(div):
     for node in div.select("div.button-actividad"):
         node.decompose()
 
+    # Elimiar espacios en blanco de párrafos sin imágenes
+    paragraphs = div.find_all('p')
+    
+    for p in paragraphs:
+        img = p.find("img")
+        iframe = p.find("iframe")
+
+        if not img and not iframe:
+            # Si el párrafo no tiene texto (después de strip)
+            if not p.get_text(strip=True):
+                print(p)
+                p.decompose()  # Elimina el elemento del DOM
+
     return div
 
 def replace_iframe(html):

@@ -67,10 +67,8 @@ em {
 .pagina-horizontal {
     page: horizontal;
     /* Nueva página antes */
-    page-break-before: always;
     break-before: always;
     /* Evitar nueva página después */
-    page-break-after: avoid;
     break-after: avoid;
 }
 
@@ -396,7 +394,6 @@ pre code {
 /* Prevenir saltos de página dentro del código */
 code,
 pre code {
-    page-break-inside: avoid;
     break-inside: avoid;
 }
 
@@ -426,14 +423,6 @@ th code {
 }
 
 /* Listas */
-
-ul li {
-    line-height: 1.5;
-}
-
-li {
-    line-height: 1.5;
-}
 
 ul {
     margin-left: 10px;
@@ -490,7 +479,6 @@ ol[start="0"]>li::before {
 ############################################################################*/
 
 .contenedor-imagen {
-    page-break-inside: avoid;
     break-inside: avoid;
 }
 
@@ -515,12 +503,6 @@ ol[start="0"]>li::before {
 # Tablas
 ############################################################################*/
 
-.contenedor-tabla,
-.contenedor-tabla p:last-child {
-    page-break-after: avoid;
-    break-after: avoid;
-}
-
 .contenedor-tabla table {
     width: 100%;
     border-collapse: collapse;
@@ -529,8 +511,8 @@ ol[start="0"]>li::before {
 }
 
 .contenedor-tabla caption {
-    page-break-after: avoid;
-    page-break-inside: avoid;
+    break-after: avoid;
+    break-inside: avoid;
     caption-side: top;
     padding: 10px;
 }
@@ -542,13 +524,12 @@ ol[start="0"]>li::before {
 
 .contenedor-tabla tbody td {
     /* Evita dividir filas */
-    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 /* Evitar que una fila se parta entre páginas */
 .contenedor-tabla tr {
     break-inside: avoid;
-    page-break-inside: avoid;
 }
 
 /* Encabezados */
@@ -564,7 +545,7 @@ ol[start="0"]>li::before {
     border: 1px solid var(--gris);
     padding: 6pt 8pt;
     vertical-align: top;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
     width: auto;
@@ -575,7 +556,6 @@ ol[start="0"]>li::before {
 .contenedor-tabla td ul,
 .contenedor-tabla td ol {
     break-inside: avoid;
-    page-break-inside: avoid;
     margin: 0 0 4pt 0;
 }
 
