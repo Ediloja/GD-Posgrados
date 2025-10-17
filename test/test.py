@@ -4,7 +4,7 @@ from weasyprint import HTML, CSS
 BASE = Path(__file__).parent.resolve()
 # Rutas de los archivos
 html_path = BASE / 'index.html'
-css_path  = BASE / 'style.css'
+css_path  = BASE / 'estilos.css'
 
 output = BASE / 'Archivo.pdf'
 

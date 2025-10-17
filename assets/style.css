@@ -2,12 +2,12 @@
 # General
 ############################################################################*/
 
-/* * {
+* {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-optical-sizing: auto;
     font-variation-settings: "wdth" 100;
-} */
+}
 
 :root {
     /* Colores */
@@ -18,6 +18,7 @@
     --azul: #003b71;
     --negro: #000000;
     --focalizador: #faf7d0;
+    --codigo: #d73a49;
 
     /* Tamaño A4 */
     --page-width: 210mm;
@@ -65,10 +66,12 @@ em {
 
 .pagina-horizontal {
     page: horizontal;
-    page-break-before: always;
     /* Nueva página antes */
-    page-break-after: always;
-    /* Nueva página después */
+    page-break-before: always;
+    break-before: always;
+    /* Evitar nueva página después */
+    page-break-after: avoid;
+    break-after: avoid;
 }
 
 /*############################################################################
@@ -315,7 +318,9 @@ img.logo {
     font-weight: 700;
 }
 
-/* Actividades recomendadas */
+/*############################################################################
+# Actividades recomendadas
+############################################################################*/
 
 .contenedor-mensaje {
     padding-top: 5px;
@@ -340,7 +345,9 @@ img.logo {
     border-radius: 5px;
 }
 
-/* Focalizadores */
+/*############################################################################
+# Focalizadores
+############################################################################*/
 
 .focalizador {
     display: flex;
@@ -354,6 +361,129 @@ img.logo {
 .focalizador img {
     width: 80px;
 }
+
+/*############################################################################
+# Etiquetas <code>
+############################################################################*/
+
+code {
+    font-size: 0.9em;
+    background-color: var(--gris-claro);
+    color: var(--codigo);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--gris-oscuro);
+    /* white-space: nowrap; */
+    display: inline;
+    line-height: 1.4;
+}
+
+/* Para bloques de código más largos */
+pre code {
+    display: block;
+    white-space: pre;
+    overflow: visible;
+    padding: 12px 16px;
+    background-color: var(--gris-claro);
+    border: 1px solid var(--gris-oscuro);
+    border-radius: 6px;
+    color: var(--gris-oscuro);
+    font-size: 0.85em;
+    line-height: 1.45;
+    margin: 8px 0;
+}
+
+/* Prevenir saltos de página dentro del código */
+code,
+pre code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Manejo de texto largo en código inline */
+code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/*############################################################################
+# Listas
+############################################################################*/
+
+li code {
+    vertical-align: baseline;
+}
+
+/* Estilos para código en tablas */
+td code,
+th code {
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Listas */
+
+ul li {
+    line-height: 1.5;
+}
+
+li {
+    line-height: 1.5;
+}
+
+ul {
+    margin-left: 10px;
+    padding-left: 10px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: justify;
+}
+
+ol {
+    list-style-type: decimal;
+    margin-right: 10px;
+    padding-left: 20px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: justify;
+}
+
+ol ol {
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+ol[type="a"] {
+    list-style-type: lower-alpha;
+}
+
+ol[type="A"] {
+    list-style-type: upper-alpha;
+}
+
+ol[type="i"] {
+    list-style-type: lower-roman;
+}
+
+/* Aplica solo a las listas <ol> con atributo start="0" */
+ol[start="0"] {
+    list-style-type: none;
+    counter-reset: list-counter -1;
+    padding-left: 10px;
+}
+
+ol[start="0"]>li {
+    counter-increment: list-counter;
+}
+
+ol[start="0"]>li::before {
+    content: counter(list-counter) ". ";
+}
+
 
 /*############################################################################
 # Imágenes
@@ -385,11 +515,17 @@ img.logo {
 # Tablas
 ############################################################################*/
 
+.contenedor-tabla,
+.contenedor-tabla p:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
 .contenedor-tabla table {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid var(--gris);
-    table-layout: fixed;
+    table-layout: auto;
 }
 
 .contenedor-tabla caption {
@@ -413,7 +549,6 @@ img.logo {
 .contenedor-tabla tr {
     break-inside: avoid;
     page-break-inside: avoid;
-    /* alias legacy */
 }
 
 /* Encabezados */
@@ -432,6 +567,7 @@ img.logo {
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: auto;
+    width: auto;
 }
 
 /* Evitar saltos dentro de celdas con bloques largos (listas, párrafos) */

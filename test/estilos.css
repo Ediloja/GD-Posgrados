@@ -1,0 +1,578 @@
+/*############################################################################
+# General
+############################################################################*/
+
+* {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+}
+
+:root {
+    /* Colores */
+    --gris: #c9c9c8;
+    --gris-claro: #e7e9ea;
+    --gris-oscuro: #393939;
+    --amarillo: #f4ed06;
+    --azul: #003b71;
+    --negro: #000000;
+    --focalizador: #faf7d0;
+    --codigo: #d73a49;
+
+    /* Tamaño A4 */
+    --page-width: 210mm;
+    --page-height: 297mm;
+}
+
+@page {
+    size: A4 portrait;
+
+    @bottom-center {
+        content: counter(page);
+        font-weight: 600;
+        font-size: 10pt;
+        color: var(--gris);
+    }
+}
+
+/* Cursivas */
+
+em {
+    font-style: italic;
+}
+
+/*############################################################################
+# Configuraciones de la diagramación
+############################################################################*/
+
+/* Saltos de página */
+
+/* .datos-generales,
+.contenedor,
+.creditos,
+.indice,
+.contenedor h1,
+.contraportada,
+.nueva-pagina {
+    break-before: page;
+} */
+
+/* Página horizontal */
+@page horizontal {
+    size: A4 landscape;
+    margin: 15mm;
+}
+
+.pagina-horizontal {
+    page: horizontal;
+    /* Nueva página antes */
+    /* break-before: always; */
+    /* Evitar nueva página después */
+    /* break-after: avoid; */
+}
+
+/*############################################################################
+# Grid layout
+############################################################################*/
+
+.contenedor-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*############################################################################
+# Menú de acceso
+############################################################################*/
+
+/* Menú lateral */
+
+.barra-gris {
+    position: fixed;
+    top: -15%;
+    right: -15%;
+    width: 15%;
+    bottom: -15%;
+    background-color: var(--gris-claro);
+}
+
+.menu-lateral {
+    position: fixed;
+    right: -1.9cm;
+    display: flex;
+    flex-direction: column;
+    top: 0.8cm;
+    z-index: 3;
+}
+
+.menu-lateral img {
+    height: 1.8cm;
+    width: 1.8cm;
+}
+
+/* Menú de semanas */
+
+/* @page menu-semanas {
+    margin-top: 60px;
+
+    @top-left {
+        content: element(header);
+    }
+}
+
+.contenedor {
+    page: menu-semanas;
+}
+
+.menu-semanas {
+    position: running(header);
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding: 15px;
+}
+
+.menu-semanas .titulo-semana {
+    font-weight: bold;
+}
+
+.menu-semanas a {
+    padding: 0.2cm;
+    margin: 0 0.1cm;
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 4px;
+    background: var(--gris-claro);
+    color: var(--gris-oscuro);
+} */
+
+/*############################################################################
+# Portada
+############################################################################*/
+
+/* Portada */
+@page :first {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-top: 3em;
+    padding-left: 3em;
+    background: url("img/background.png") no-repeat center center;
+    background-size: cover;
+}
+
+img.logo {
+    margin-top: 1em;
+    margin-left: 2em;
+    width: 100px;
+}
+
+.portada {
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.portada #maestria {
+    font-weight: bold;
+    width: 80%;
+    color: #000;
+    border-left: 2px solid var(--amarillo);
+    padding: 0.5em;
+    font-size: 18pt;
+    margin-top: 5em;
+}
+
+.portada #curso {
+    width: 80%;
+    color: #000;
+    border-left: 2px solid var(--gris);
+    padding: 0.5em;
+    font-size: 14pt;
+    margin: 2em;
+}
+
+/* Datos generales */
+
+.datos-generales {
+    height: 980px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.datos-generales img {
+    border-left: 2em solid var(--amarillo);
+    margin-left: 1em;
+    padding-left: 1em;
+}
+
+.datos-generales table.tabla-datos th {
+    color: #000;
+    background-color: var(--amarillo);
+    text-align: center;
+}
+
+.datos-generales table.tabla-datos td {
+    text-align: center;
+}
+
+.datos-generales .barra {
+    font-family: "Libre Barcode 128 Text", system-ui;
+    font-weight: 400;
+    font-size: 25pt;
+}
+
+/* Créditos */
+
+.creditos h1,
+.creditos p {
+    font-size: 12pt;
+}
+
+/*############################################################################
+# Índice
+############################################################################*/
+
+.indice h1 {
+    color: var(--gris-oscuro);
+}
+
+.indice li {
+    margin-top: 0.25em;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.indice a {
+    display: block;
+    margin-bottom: 0.3em;
+    text-decoration: none;
+    color: var(--azul);
+    line-height: 1.5em;
+}
+
+.indice a::after {
+    content: leader(".") target-counter(attr(href), page);
+}
+
+.indice .nivel-1 {
+    margin-left: -2em;
+    font-weight: bold;
+}
+
+.indice .nivel-2 {
+    margin-left: -1em;
+    font-weight: bold;
+    color: var(--gris-oscuro);
+}
+
+.indice .nivel-3 {
+    margin-left: 0;
+    color: var(--gris-oscuro);
+}
+
+.indice .nivel-4 {
+    margin-left: 1em;
+    color: var(--gris-oscuro);
+}
+
+.indice .nivel {
+    margin-left: -2em;
+    color: var(--gris-oscuro);
+}
+
+/*############################################################################
+# Contenido
+############################################################################*/
+
+.indice,
+.contenedor {
+    margin-right: 10px;
+}
+
+.contenedor p,
+.contenedor li {
+    text-align: justify;
+}
+
+.contenedor h1 {
+    font-size: 24pt;
+    border-bottom: 4px solid var(--amarillo);
+}
+
+.contenedor h2 {
+    font-size: 20pt;
+    color: var(--gris-oscuro);
+    font-weight: 900;
+}
+
+.contenedor h3 {
+    font-size: 16pt;
+    color: var(--gris-oscuro);
+    font-weight: 700;
+}
+
+/*############################################################################
+# Actividades recomendadas
+############################################################################*/
+
+.contenedor-mensaje {
+    padding-top: 5px;
+    padding-right: 5px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.contenedor-mensaje .columna1-mensaje {
+    text-align: center;
+}
+
+.contenedor-mensaje .columna1-mensaje img {
+    width: 33px;
+    height: 33px;
+}
+
+.contenedor-mensaje .columan2-mensaje .amarillo {
+    background-color: var(--amarillo);
+    padding: 1px 5px 1px 10px;
+    margin: 1px;
+    border-radius: 5px;
+}
+
+/*############################################################################
+# Focalizadores
+############################################################################*/
+
+.focalizador {
+    display: flex;
+    align-items: center;
+    background-color: var(--focalizador);
+    padding: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.focalizador img {
+    width: 80px;
+}
+
+/*############################################################################
+# Etiquetas <code>
+############################################################################*/
+
+code {
+    font-size: 0.9em;
+    background-color: var(--gris-claro);
+    color: var(--codigo);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--gris-oscuro);
+    /* white-space: nowrap; */
+    display: inline;
+    line-height: 1.4;
+}
+
+/* Para bloques de código más largos */
+pre code {
+    display: block;
+    white-space: pre;
+    overflow: visible;
+    padding: 12px 16px;
+    background-color: var(--gris-claro);
+    border: 1px solid var(--gris-oscuro);
+    border-radius: 6px;
+    color: var(--gris-oscuro);
+    font-size: 0.85em;
+    line-height: 1.45;
+    margin: 8px 0;
+}
+
+/* Prevenir saltos de página dentro del código */
+code,
+pre code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Manejo de texto largo en código inline */
+code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/*############################################################################
+# Listas
+############################################################################*/
+
+li code {
+    vertical-align: baseline;
+}
+
+/* Estilos para código en tablas */
+td code,
+th code {
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Listas */
+
+ul li {
+    line-height: 1.5;
+}
+
+li {
+    line-height: 1.5;
+}
+
+ul {
+    margin-left: 10px;
+    padding-left: 10px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: justify;
+}
+
+ol {
+    list-style-type: decimal;
+    margin-right: 10px;
+    padding-left: 20px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: justify;
+}
+
+ol ol {
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+ol[type="a"] {
+    list-style-type: lower-alpha;
+}
+
+ol[type="A"] {
+    list-style-type: upper-alpha;
+}
+
+ol[type="i"] {
+    list-style-type: lower-roman;
+}
+
+/* Aplica solo a las listas <ol> con atributo start="0" */
+ol[start="0"] {
+    list-style-type: none;
+    counter-reset: list-counter -1;
+    padding-left: 10px;
+}
+
+ol[start="0"]>li {
+    counter-increment: list-counter;
+}
+
+ol[start="0"]>li::before {
+    content: counter(list-counter) ". ";
+}
+
+
+/*############################################################################
+# Imágenes
+############################################################################*/
+
+.contenedor-imagen {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.contenedor-imagen img {
+    max-width: 75%;
+    text-align: left;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.contenedor-imagen p {
+    font-size: 10pt;
+    max-width: none;
+}
+
+/*############################################################################
+# Tablas
+############################################################################*/
+
+.contenedor-tabla,
+.contenedor-tabla p:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+.contenedor-tabla table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--gris);
+    table-layout: auto;
+}
+
+.contenedor-tabla caption {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    caption-side: top;
+    padding: 10px;
+}
+
+/* Repetición de encabezado y pie en cada página */
+.contenedor-tabla thead {
+    display: table-header-group;
+}
+
+.contenedor-tabla tbody td {
+    /* Evita dividir filas */
+    page-break-inside: avoid;
+}
+
+/* Evitar que una fila se parta entre páginas */
+.contenedor-tabla tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+/* Encabezados */
+.contenedor-tabla th {
+    background: var(--negro);
+    color: var(--amarillo);
+    font-weight: 600;
+}
+
+/* Celdas */
+.contenedor-tabla th,
+.contenedor-tabla td {
+    border: 1px solid var(--gris);
+    padding: 6pt 8pt;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+    width: auto;
+}
+
+/* Evitar saltos dentro de celdas con bloques largos (listas, párrafos) */
+.contenedor-tabla td p,
+.contenedor-tabla td ul,
+.contenedor-tabla td ol {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 0 0 4pt 0;
+}
