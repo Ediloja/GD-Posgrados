@@ -82,7 +82,7 @@ def delete_elements(div):
     for node in div.select("div.button-actividad"):
         node.decompose()
 
-    # Elimiar espacios en blanco de párrafos sin imágenes
+    # Elimiar espacios en blanco de párrafos sin imágenes y sin iframes
     paragraphs = div.find_all('p')
     
     for p in paragraphs:
@@ -237,7 +237,7 @@ def clear_styles(div):
     """Versión simple que solo limpia estilos inline"""
     
     estilos_permitidos = ['padding-left', 'margin-left', 'margin-right', 
-                          'border', 'list-style-type', 'max-width']
+                          'border', 'list-style-type', 'max-width', 'color']
     
     
     for elemento in div.find_all(style=True):
