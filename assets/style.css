@@ -339,6 +339,11 @@ img.logo {
     -webkit-box-decoration-break: clone;
 }
 
+/* Cuando existe focalizadores seguidos */
+.contenedor-mensaje+.contenedor-mensaje {
+    margin-top: 20px;
+}
+
 .contenedor-mensaje .columna1-mensaje {
     text-align: center;
 }
@@ -348,11 +353,19 @@ img.logo {
     height: 33px;
 }
 
-.contenedor-mensaje .columan2-mensaje .amarillo {
-    background-color: var(--amarillo);
+.contenedor-mensaje .columan2-mensaje .amarillo,
+.contenedor-mensaje .columan2-mensaje .plomo {
     padding: 1px 5px 1px 10px;
     margin: 1px;
     border-radius: 5px;
+}
+
+.contenedor-mensaje .columan2-mensaje .amarillo {
+    background-color: var(--amarillo);
+}
+
+.contenedor-mensaje .columan2-mensaje .plomo {
+    background-color: var(--gris);
 }
 
 /*############################################################################
